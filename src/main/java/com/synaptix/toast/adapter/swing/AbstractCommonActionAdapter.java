@@ -11,6 +11,7 @@ import com.synaptix.toast.core.adapter.ActionAdapterKind;
 import com.synaptix.toast.core.annotation.Action;
 import com.synaptix.toast.core.annotation.ActionAdapter;
 import com.synaptix.toast.core.report.ErrorResult;
+import com.synaptix.toast.core.report.FailureResult;
 import com.synaptix.toast.core.report.SuccessResult;
 import com.synaptix.toast.dao.domain.api.test.ITestResult;
 import com.synaptix.toast.runtime.IActionItemRepository;
@@ -131,7 +132,7 @@ public abstract class AbstractCommonActionAdapter {
 			return new SuccessResult(Boolean.TRUE.toString());
 		}
 		else {
-			return new ErrorResult(String.format("%s == %s => %s", var1, var2, Boolean.FALSE.toString()));
+			return new FailureResult(String.format("%s == %s => %s", var1, var2, Boolean.FALSE.toString()));
 		}
 	}
 
@@ -146,7 +147,7 @@ public abstract class AbstractCommonActionAdapter {
 			return new SuccessResult(Boolean.TRUE.toString());
 		}
 		else {
-			return new ErrorResult(String.format("%s == %s => %s", value, var, Boolean.FALSE.toString()));
+			return new FailureResult(String.format("%s == %s => %s", value, var, Boolean.FALSE.toString()));
 		}
 	}
 

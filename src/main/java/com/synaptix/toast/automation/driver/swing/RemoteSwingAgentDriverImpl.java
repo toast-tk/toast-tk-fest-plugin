@@ -19,8 +19,9 @@ import com.synaptix.toast.core.net.response.ErrorResponse;
 import com.synaptix.toast.core.net.response.ExistsResponse;
 import com.synaptix.toast.core.net.response.InitResponse;
 import com.synaptix.toast.core.net.response.ValueResponse;
-import com.synaptix.toast.core.report.ErrorResult;
+import com.synaptix.toast.core.report.FailureResult;
 import com.synaptix.toast.core.report.SuccessResult;
+import com.synaptix.toast.core.report.TestResult;
 import com.synaptix.toast.core.runtime.ErrorResultReceivedException;
 import com.synaptix.toast.core.runtime.ITCPClient;
 import com.synaptix.toast.core.runtime.ITCPResponseReceivedHandler;
@@ -139,7 +140,7 @@ public class RemoteSwingAgentDriverImpl implements IRemoteSwingAgentDriver {
 	private void handleErrorResponse(
 		Object object) {
 		ErrorResponse response = (ErrorResponse) object;
-		ITestResult testResult = new ErrorResult(response.getMessage());
+		ITestResult testResult = new FailureResult(response.getMessage());
 		testResult.setScreenShot(response.screenshot);
 		if(valueResponseMap.keySet().contains(response.getId())) {
 			valueResponseMap.put(response.getId(), testResult);
@@ -219,8 +220,8 @@ public class RemoteSwingAgentDriverImpl implements IRemoteSwingAgentDriver {
 					e.printStackTrace();
 				}
 			}
-			if(existsResponseMap.get(reqId) instanceof ITestResult) {
-				throw new ErrorResultReceivedException((ITestResult) existsResponseMap.get(reqId));
+			if(existsResponseMap.get(reqId) instanceof TestResult) {
+				throw new ErrorResultReceivedException((TestResult) existsResponseMap.get(reqId));
 			}
 			res = (Boolean) existsResponseMap.get(reqId);
 			existsResponseMap.remove(reqId);
@@ -271,9 +272,10 @@ public class RemoteSwingAgentDriverImpl implements IRemoteSwingAgentDriver {
 				}
 			}
 			if(valueResponseMap.get(idRequest) instanceof ITestResult) {
-				valueResponseMap.remove(idRequest);
 				ITestResult result = (ITestResult) valueResponseMap.get(idRequest);
-				return new ValueResponse(idRequest, result.getMessage(), result.getScreenShot());
+				ValueResponse valueResponse = new ValueResponse(idRequest, result.getMessage(), result.getScreenShot());
+				valueResponseMap.remove(idRequest);
+				return valueResponse;
 			}
 			res = (ValueResponse) valueResponseMap.get(idRequest);
 			valueResponseMap.remove(idRequest);

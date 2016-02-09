@@ -1,12 +1,8 @@
 package com.synaptix.toast.adapter.swing;
 
-import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.AddValueInVar;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.ClickOn;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.ClickOnIn;
-import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.DiviserVarByValue;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.GetComponentValue;
-import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.MultiplyVarByValue;
-import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.RemplacerVarParValue;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SWING_COMPONENT_REGEX;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SelectContectualMenu;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SelectMenuPath;
@@ -14,11 +10,9 @@ import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SelectSub
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SelectTableRow;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SelectValueInList;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.StoreComponentValueInVar;
-import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SubstractValueFromVar;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.TypeValue;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.TypeValueInInput;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.TypeVarIn;
-import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.VALUE_REGEX;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.Wait;
 
 import java.util.ArrayList;
@@ -41,7 +35,7 @@ import com.synaptix.toast.core.annotation.ActionAdapter;
 import com.synaptix.toast.core.driver.IRemoteSwingAgentDriver;
 import com.synaptix.toast.core.net.request.CommandRequest;
 import com.synaptix.toast.core.net.request.TableCommandRequestQueryCriteria;
-import com.synaptix.toast.core.report.ErrorResult;
+import com.synaptix.toast.core.report.FailureResult;
 import com.synaptix.toast.core.report.SuccessResult;
 import com.synaptix.toast.core.runtime.IFeedableSwingPage;
 import com.synaptix.toast.dao.domain.api.test.ITestResult;
@@ -122,7 +116,7 @@ public abstract class AbstractSwingActionAdapter {
 			return new SuccessResult("true");
 		}
 		else {
-			return new ErrorResult("false");
+			return new FailureResult("false");
 		}
 	}
 
@@ -190,7 +184,7 @@ public abstract class AbstractSwingActionAdapter {
 			.with(locator[0])
 			.ofType(AutoSwingType.menu.name()).select(locator[1]).build();
 		ITestResult waitForValue = driver.processAndWaitForValue(request);
-		return waitForValue.isError() ? new ErrorResult("Menu {" + menu + "} not found !"): new SuccessResult();
+		return waitForValue.isError() ? new FailureResult("Menu {" + menu + "} not found !"): new SuccessResult();
 	}
 
 	@Action(action = SelectSubMenu, description = "Selectionner un sous menu")
@@ -259,7 +253,7 @@ public abstract class AbstractSwingActionAdapter {
 			.with(dialogName).exists().build();
 		driver.process(request);
 		boolean waitForExist = driver.waitForExist(request.getId());
-		return waitForExist ? new SuccessResult() : new ErrorResult("Dialogue " + dialogName+ " pas disponible !");
+		return waitForExist ? new SuccessResult() : new FailureResult("Dialogue " + dialogName+ " pas disponible !");
 	}
 
 	
