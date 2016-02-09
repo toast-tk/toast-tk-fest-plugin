@@ -162,8 +162,8 @@
 			<artifactId>kryonet</artifactId>
 			<version>${kryonet.version}</version>
 		</dependency>
-	    <!-- Swing driver -->
-	    <dependency>
+		<!-- Swing driver -->
+		<dependency>
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-swing</artifactId>
 			<version>${fest.version}</version>
@@ -210,4 +210,10 @@
 			</distributionManagement>
 		</profile>
 	</profiles>
+	<repositories>
+		<repository>
+			<id>synaptix-snapshots-repository</id>
+			<url>http://nexus.synaptix-labs.com/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
 </project>
