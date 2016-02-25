@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.synaptix.toast.adapter.constant.Property;
+import com.synaptix.toast.adapter.swing.component.SwingButtonElement;
 import com.synaptix.toast.adapter.swing.component.SwingDateElement;
 import com.synaptix.toast.adapter.swing.component.SwingInputElement;
 import com.synaptix.toast.adapter.swing.component.SwingListElement;
@@ -29,6 +30,7 @@ import com.synaptix.toast.adapter.web.HasClickAction;
 import com.synaptix.toast.adapter.web.HasSubItems;
 import com.synaptix.toast.adapter.web.HasValueBase;
 import com.synaptix.toast.core.adapter.ActionAdapterKind;
+import com.synaptix.toast.core.adapter.ActionAdapterSentenceRef;
 import com.synaptix.toast.core.adapter.AutoSwingType;
 import com.synaptix.toast.core.annotation.Action;
 import com.synaptix.toast.core.annotation.ActionAdapter;
@@ -62,7 +64,6 @@ public abstract class AbstractSwingActionAdapter {
 			e.printStackTrace();
 		}
 	}
-
 
 	@Action(action = TypeValue, description = "Saisir une chaine de caractère au clavier")
 	public ITestResult typeValue(
@@ -166,6 +167,20 @@ public abstract class AbstractSwingActionAdapter {
 		return result;
 	}
 
+	@Action(id="active_component", action = ActionAdapterSentenceRef.SWING_COMPONENT_REGEX + " is active", description = "Verifie si un composant est actif")
+	public ITestResult isActive(SwingAutoElement pageField)
+		throws Exception {
+		if(!pageField.getWrappedElement().getType().equals(AutoSwingType.button)){
+			return new FailureResult("Implementation is restricted to buttons only !");
+		}
+		SwingButtonElement button = (SwingButtonElement) pageField;
+		if(button.isActive()){
+			return new SuccessResult();
+		}else{
+			return new FailureResult();
+		}
+	}
+	
 	@Action(action = Wait, description = "Attendre n secondes avant la prochaine action")
 	public ITestResult wait(
 		String time)

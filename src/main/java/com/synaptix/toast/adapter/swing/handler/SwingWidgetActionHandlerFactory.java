@@ -8,12 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.synaptix.toast.adapter.swing.handler.button.JButtonActionHandler;
 import com.synaptix.toast.adapter.swing.handler.button.JCheckBoxActionHandler;
+import com.synaptix.toast.adapter.swing.handler.button.JRadioButtonActionHandler;
 import com.synaptix.toast.adapter.swing.handler.input.JLabelActionHandler;
 import com.synaptix.toast.adapter.swing.handler.input.JPasswordFieldActionHandler;
 import com.synaptix.toast.adapter.swing.handler.input.JTextAreaActionHandler;
@@ -33,6 +35,7 @@ public class SwingWidgetActionHandlerFactory {
 		map.put(JTextField.class, new JTextFieldActionHandler());
 		map.put(JPasswordField.class, new JPasswordFieldActionHandler());
 		map.put(JButton.class, new JButtonActionHandler());
+		map.put(JRadioButton.class, new JRadioButtonActionHandler());
 		map.put(JCheckBox.class, new JCheckBoxActionHandler());
 		map.put(JTextArea.class, new JTextAreaActionHandler());
 		map.put(JTable.class, new JTableActionHandler());

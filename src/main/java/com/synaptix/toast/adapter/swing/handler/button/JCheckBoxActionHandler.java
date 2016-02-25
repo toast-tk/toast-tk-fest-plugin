@@ -17,10 +17,16 @@ public class JCheckBoxActionHandler implements ISwingwidgetActionHandler<JCheckB
 		JCheckBox checkbox,
 		CommandRequest command) {
 		switch(command.action) {
-			case CLICK :
+			case SET :
 				try{
+					Boolean value = Boolean.valueOf(command.value);
 					JCheckBoxFixture bFixture = new JCheckBoxFixture(FestRobotInstance.getRobot(), checkbox);
-					bFixture.click();
+					if(value != null && value.booleanValue()){
+						bFixture.check();
+					}else{
+						bFixture.uncheck();
+					}
+					
 					return ResultKind.SUCCESS.name();
 				}catch(Exception e){
 					e.printStackTrace();

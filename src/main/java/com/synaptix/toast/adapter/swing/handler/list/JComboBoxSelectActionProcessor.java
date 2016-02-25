@@ -35,7 +35,8 @@ class JComboBoxSelectActionProcessor implements ActionProcessor<JComboBox> {
 		if(command.value.equalsIgnoreCase(fixture.valueAt(selectedIndex))) {
 			return ITestResult.ResultKind.SUCCESS.name();
 		}
-		else {
+		else 
+		{
 			return ITestResult.ResultKind.ERROR.name();
 		}
 	}
@@ -49,7 +50,8 @@ class JComboBoxSelectActionProcessor implements ActionProcessor<JComboBox> {
 			fixture.selectItem(indexToSelect);
 			return ITestResult.ResultKind.SUCCESS.name();
 		}
-		else {
+		else 
+		{
 			return ITestResult.ResultKind.ERROR.name();
 		}
 	}

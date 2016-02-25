@@ -2,7 +2,7 @@ package com.synaptix.toast.adapter.swing.handler.button;
 
 import java.util.concurrent.CountDownLatch;
 
-import javax.swing.JButton;
+import javax.swing.JRadioButton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,14 +12,14 @@ import com.synaptix.toast.adapter.swing.utils.FestRobotInstance;
 import com.synaptix.toast.core.net.request.CommandRequest;
 import com.synaptix.toast.dao.domain.api.test.ITestResult.ResultKind;
 
-public class JButtonActionHandler implements
-		ISwingwidgetActionHandler<JButton, String, CommandRequest> {
+public class JRadioButtonActionHandler implements
+		ISwingwidgetActionHandler<JRadioButton, String, CommandRequest> {
 	
 
-	private static final Logger LOG = LogManager.getLogger(JButtonActionHandler.class);
+	private static final Logger LOG = LogManager.getLogger(JRadioButtonActionHandler.class);
 
 	@Override
-	public String handle(final JButton button, CommandRequest command) {
+	public String handle(final JRadioButton button, CommandRequest command) {
 		switch (command.action) {
 		case CLICK:
 			final CountDownLatch latch = new CountDownLatch(1);
@@ -37,14 +37,8 @@ public class JButtonActionHandler implements
 				LOG.error(e.getMessage(), e);
 				return ResultKind.ERROR.name();
 			}
-		case ACTIVE:
-			if(button.isEnabled()){
-				return ResultKind.SUCCESS.name();
-			}else{
-				return ResultKind.ERROR.name();
-			}
 		default:
-			throw new IllegalArgumentException("Unsupported command for JButton: " + command.action.name());
+			throw new IllegalArgumentException("Unsupported command for JRadioButton: " + command.action.name());
 		}
 	}
 }

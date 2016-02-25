@@ -23,7 +23,7 @@ public class CommandRequest implements IIdRequest {
 
 	public enum COMMAND_TYPE {
 		SET("set"), CLICK("click"), EXISTS("exists"), CLEAR("clear"), SELECT("select"), GET("get"),
-		DOUBLE_CLICK("doubleClick"), SELECT_MENU("selectMenu"), FIND("find"), COUNT("count");
+		DOUBLE_CLICK("doubleClick"), SELECT_MENU("selectMenu"), FIND("find"), COUNT("count"), ACTIVE("active");
 
 		private final String type;
 
@@ -111,6 +111,13 @@ public class CommandRequest implements IIdRequest {
 			this.action = COMMAND_TYPE.CLICK;
 			return this;
 		}
+		
+
+		public CommandRequestBuilder isActive() {
+			this.action = COMMAND_TYPE.ACTIVE;
+			return this;
+		}
+
 
 		public CommandRequestBuilder exists() {
 			this.action = COMMAND_TYPE.EXISTS;

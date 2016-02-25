@@ -10,15 +10,15 @@ import com.synaptix.toast.core.runtime.ISwingElementDescriptor;
 import com.synaptix.toast.dao.domain.api.test.ITestResult;
 import com.synaptix.toast.dao.domain.api.test.ITestResult.ResultKind;
 
-public class SwingButtonElement extends SwingAutoElement implements HasClickAction {
+public class SwingRadioButtonElement extends SwingAutoElement implements HasClickAction {
 
-	public SwingButtonElement(
+	public SwingRadioButtonElement(
 		ISwingElementDescriptor element,
 		IRemoteSwingAgentDriver driver) {
 		super(element, driver);
 	}
 
-	public SwingButtonElement(
+	public SwingRadioButtonElement(
 		ISwingElementDescriptor element) {
 		super(element);
 	}
@@ -33,17 +33,6 @@ public class SwingButtonElement extends SwingAutoElement implements HasClickActi
 		result.setResultKind(res && result.getMessage().equals(ResultKind.SUCCESS.name()) ? ResultKind.SUCCESS : ResultKind.ERROR);
 		return result;
 	}
-	
-	public boolean isActive()
-		throws Exception {
-		boolean res = exists();
-		final String requestId = UUID.randomUUID().toString();
-		ITestResult result = frontEndDriver.processAndWaitForValue(new CommandRequest.CommandRequestBuilder(requestId).with(wrappedElement.getLocator())
-			.ofType(wrappedElement.getType().name()).isActive().build());
-		boolean isActive = res && result.getMessage().equals(ResultKind.SUCCESS.name());
-		return isActive;
-	}
-
 
 	public static CommandRequest buildClickRequest(
 		String locator,
