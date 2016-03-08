@@ -244,6 +244,9 @@ public abstract class AbstractSwingActionAdapter {
 		String criterion) {
 		String col = criterion.split(Property.TABLE_KEY_VALUE_SEPARATOR)[0];
 		String val = criterion.split(Property.TABLE_KEY_VALUE_SEPARATOR)[1];
+		if(val.startsWith("$")){
+			val = repo.getUserVariables().get(val).toString();
+		}
 		TableCommandRequestQueryCriteria tableCriterion = new TableCommandRequestQueryCriteria(col, val);
 		return tableCriterion;
 	}
@@ -263,9 +266,10 @@ public abstract class AbstractSwingActionAdapter {
 	public ITestResult waitForDialogDisplay(
 		String dialogName)
 		throws Exception {
-		CommandRequest request = new CommandRequest.CommandRequestBuilder(UUID.randomUUID().toString())
-			.ofType(AutoSwingType.dialog.name())
-			.with(dialogName).exists().build();
+		CommandRequest request = new CommandRequest
+				.CommandRequestBuilder(UUID.randomUUID().toString())
+				.ofType(AutoSwingType.dialog.name())
+				.with(dialogName).exists().build();
 		driver.process(request);
 		boolean waitForExist = driver.waitForExist(request.getId());
 		return waitForExist ? new SuccessResult() : new FailureResult("Dialogue " + dialogName+ " pas disponible !");
