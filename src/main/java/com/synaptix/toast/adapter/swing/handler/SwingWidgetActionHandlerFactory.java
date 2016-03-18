@@ -27,10 +27,10 @@ public class SwingWidgetActionHandlerFactory {
 	
 	private static SwingWidgetActionHandlerFactory instance;
 	
-	private static Map<Class<? extends Component>, ISwingwidgetActionHandler> map;
+	private static Map<Class<? extends Component>, ISwingWidgetActionHandler> map;
 	
 	static{
-		map = new HashMap<Class<? extends Component>, ISwingwidgetActionHandler>();
+		map = new HashMap<Class<? extends Component>, ISwingWidgetActionHandler>();
 		map.put(JLabel.class, new JLabelActionHandler());
 		map.put(JTextField.class, new JTextFieldActionHandler());
 		map.put(JPasswordField.class, new JPasswordFieldActionHandler());
@@ -52,9 +52,9 @@ public class SwingWidgetActionHandlerFactory {
 		return instance;
 	}
 
-	public ISwingwidgetActionHandler getHandler(
+	public ISwingWidgetActionHandler getHandler(
 		Component component) {
-		for(Map.Entry<Class<? extends Component>, ISwingwidgetActionHandler> entry: map.entrySet()){
+		for(Map.Entry<Class<? extends Component>, ISwingWidgetActionHandler> entry: map.entrySet()){
 			/**entry.getKey().isInstance(component) |*/
 			if(entry.getKey().equals(component.getClass())){
 				return entry.getValue();

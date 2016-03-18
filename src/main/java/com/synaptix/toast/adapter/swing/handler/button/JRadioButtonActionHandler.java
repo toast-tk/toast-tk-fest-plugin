@@ -7,13 +7,13 @@ import javax.swing.JRadioButton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.synaptix.toast.adapter.swing.handler.ISwingwidgetActionHandler;
+import com.synaptix.toast.adapter.swing.handler.ISwingWidgetActionHandler;
 import com.synaptix.toast.adapter.swing.utils.FestRobotInstance;
 import com.synaptix.toast.core.net.request.CommandRequest;
 import com.synaptix.toast.dao.domain.api.test.ITestResult.ResultKind;
 
 public class JRadioButtonActionHandler implements
-		ISwingwidgetActionHandler<JRadioButton, String, CommandRequest> {
+			ISwingWidgetActionHandler<JRadioButton, String, CommandRequest> {
 	
 
 	private static final Logger LOG = LogManager.getLogger(JRadioButtonActionHandler.class);

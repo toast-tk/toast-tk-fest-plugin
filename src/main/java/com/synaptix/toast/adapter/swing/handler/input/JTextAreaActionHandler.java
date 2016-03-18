@@ -4,12 +4,12 @@ import javax.swing.JTextArea;
 
 import org.fest.swing.fixture.JTextComponentFixture;
 
-import com.synaptix.toast.adapter.swing.handler.ISwingwidgetActionHandler;
+import com.synaptix.toast.adapter.swing.handler.ISwingWidgetActionHandler;
 import com.synaptix.toast.adapter.swing.utils.FestRobotInstance;
 import com.synaptix.toast.core.net.request.CommandRequest;
 
 
-public class JTextAreaActionHandler implements ISwingwidgetActionHandler<JTextArea, String, CommandRequest>{
+public class JTextAreaActionHandler implements ISwingWidgetActionHandler<JTextArea, String, CommandRequest>{
 
 	@Override
 	public String handle(

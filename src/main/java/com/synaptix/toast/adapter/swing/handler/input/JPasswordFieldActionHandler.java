@@ -4,12 +4,12 @@ import javax.swing.JPasswordField;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.synaptix.toast.adapter.swing.handler.ISwingwidgetActionHandler;
+import com.synaptix.toast.adapter.swing.handler.ISwingWidgetActionHandler;
 import com.synaptix.toast.adapter.swing.utils.FestRobotInstance;
 import com.synaptix.toast.core.net.request.CommandRequest;
 
 
-public class JPasswordFieldActionHandler implements ISwingwidgetActionHandler<JPasswordField, String, CommandRequest>{
+public class JPasswordFieldActionHandler implements ISwingWidgetActionHandler<JPasswordField, String, CommandRequest>{
 
 	@Override
 	public String handle(

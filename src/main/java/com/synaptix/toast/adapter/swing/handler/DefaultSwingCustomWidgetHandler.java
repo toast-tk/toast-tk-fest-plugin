@@ -24,7 +24,7 @@ public class DefaultSwingCustomWidgetHandler implements ICustomRequestHandler {
 		Component component,
 		IIdRequest request) throws IllegalAccessException {
 		CommandRequest command = (CommandRequest) request;
-		ISwingwidgetActionHandler handler = SwingWidgetActionHandlerFactory.getInstance().getHandler(component);
+		ISwingWidgetActionHandler handler = SwingWidgetActionHandlerFactory.getInstance().getHandler(component);
 		if(handler != null){
 			return (String) handler.handle(component, command);
 		}

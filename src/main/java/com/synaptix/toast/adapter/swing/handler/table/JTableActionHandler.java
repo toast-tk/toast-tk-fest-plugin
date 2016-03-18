@@ -2,20 +2,18 @@ package com.synaptix.toast.adapter.swing.handler.table;
 
 import javax.swing.JTable;
 
-import org.fest.swing.core.Robot;
 import org.fest.swing.data.TableCell;
 import org.fest.swing.data.TableCellByColumnId;
-import org.fest.swing.fixture.JPopupMenuFixture;
 import org.fest.swing.fixture.JTableCellFixture;
 import org.fest.swing.fixture.JTableFixture;
 
-import com.synaptix.toast.adapter.swing.handler.ISwingwidgetActionHandler;
+import com.synaptix.toast.adapter.swing.handler.ISwingWidgetActionHandler;
 import com.synaptix.toast.adapter.swing.utils.FestRobotInstance;
 import com.synaptix.toast.core.net.request.TableCommandRequest;
 import com.synaptix.toast.core.net.request.TableCommandRequestQueryCriteria;
 
 public class JTableActionHandler implements
-		ISwingwidgetActionHandler<JTable, String, TableCommandRequest> {
+	ISwingWidgetActionHandler<JTable, String, TableCommandRequest> {
 
 	@Override
 	public String handle(JTable target, final TableCommandRequest command) {

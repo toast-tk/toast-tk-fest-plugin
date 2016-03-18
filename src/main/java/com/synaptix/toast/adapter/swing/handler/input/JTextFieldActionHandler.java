@@ -9,12 +9,12 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import com.synaptix.toast.adapter.swing.handler.ISwingwidgetActionHandler;
+import com.synaptix.toast.adapter.swing.handler.ISwingWidgetActionHandler;
 import com.synaptix.toast.adapter.swing.utils.FestRobotInstance;
 import com.synaptix.toast.core.net.request.CommandRequest;
 
 
-public class JTextFieldActionHandler implements ISwingwidgetActionHandler<JTextField, String, CommandRequest>{
+public class JTextFieldActionHandler implements ISwingWidgetActionHandler<JTextField, String, CommandRequest>{
 
 	@Override
 	public String handle(
@@ -28,6 +28,8 @@ public class JTextFieldActionHandler implements ISwingwidgetActionHandler<JTextF
 				break;
 			case GET :
 				return textField.getText();
+			case CLEAR:
+				textField.setText("");
 			default :
 				throw new IllegalArgumentException("Unsupported command for JTextField: " + command.action.name());
 		}
