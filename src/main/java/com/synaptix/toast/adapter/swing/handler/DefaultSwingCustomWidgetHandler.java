@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -16,8 +17,6 @@ import com.synaptix.toast.core.net.request.IIdRequest;
 import com.synaptix.toast.core.net.request.TableCommandRequest;
 
 public class DefaultSwingCustomWidgetHandler implements ICustomRequestHandler {
-
-	private static final Logger LOG = LogManager.getLogger(DefaultSwingCustomWidgetHandler.class);
 
 	@Override
 	public String hanldeFixtureCall(
@@ -55,6 +54,11 @@ public class DefaultSwingCustomWidgetHandler implements ICustomRequestHandler {
 	public boolean isInterestedIn(
 		Component component) {
 		return SwingWidgetActionHandlerFactory.getInstance().hasHandlerFor(component.getClass());
+	}
+
+	@Override
+	public Set<Class<?>> getComponentsWhiteList() {
+		return null;
 	}
 
 	static List<String> list = Collections.unmodifiableList(Arrays.asList(

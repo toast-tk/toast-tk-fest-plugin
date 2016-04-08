@@ -30,7 +30,7 @@ public class SwingWidgetActionHandlerFactory {
 	private static Map<Class<? extends Component>, ISwingWidgetActionHandler> map;
 	
 	static{
-		map = new HashMap<Class<? extends Component>, ISwingWidgetActionHandler>();
+		map = new HashMap<>();
 		map.put(JLabel.class, new JLabelActionHandler());
 		map.put(JTextField.class, new JTextFieldActionHandler());
 		map.put(JPasswordField.class, new JPasswordFieldActionHandler());
@@ -78,9 +78,8 @@ public class SwingWidgetActionHandlerFactory {
 		}
 		return false;
 	}
-//	
-//	private isSupportedComponentClass(Class<? extends Component> componentClass){
-//		
-//	}
-	
+
+	public void addHandler(Class<? extends Component> component, ISwingWidgetActionHandler handler) {
+		map.put(component, handler);
+	}
 }
