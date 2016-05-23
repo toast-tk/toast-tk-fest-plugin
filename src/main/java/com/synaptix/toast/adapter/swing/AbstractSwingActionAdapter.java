@@ -40,6 +40,7 @@ import com.synaptix.toast.core.net.request.CommandRequest;
 import com.synaptix.toast.core.net.request.TableCommandRequestQueryCriteria;
 import com.synaptix.toast.core.report.FailureResult;
 import com.synaptix.toast.core.report.SuccessResult;
+import com.synaptix.toast.core.report.TestResult;
 import com.synaptix.toast.core.runtime.IFeedableSwingPage;
 import com.synaptix.toast.dao.domain.api.test.ITestResult;
 import com.synaptix.toast.runtime.IActionItemRepository;
@@ -204,6 +205,9 @@ public abstract class AbstractSwingActionAdapter {
 		String menu)
 		throws Exception {
 		String[] locator = menu.split(" / ");
+		if(locator.length < 2){
+			return new TestResult();
+		}
 		SwingAutoUtils.confirmExist(driver, locator[0], AutoSwingType.menu.name());
 		CommandRequest request = new CommandRequest.CommandRequestBuilder(UUID.randomUUID().toString())
 			.with(locator[0])
