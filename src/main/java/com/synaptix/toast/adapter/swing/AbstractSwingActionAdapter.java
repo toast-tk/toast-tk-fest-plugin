@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import com.synaptix.toast.adapter.constant.Property;
 import com.synaptix.toast.adapter.swing.component.SwingButtonElement;
+import com.synaptix.toast.adapter.swing.component.SwingCheckBoxElement;
 import com.synaptix.toast.adapter.swing.component.SwingDateElement;
 import com.synaptix.toast.adapter.swing.component.SwingInputElement;
 import com.synaptix.toast.adapter.swing.component.SwingListElement;
@@ -84,6 +85,15 @@ public abstract class AbstractSwingActionAdapter {
 		else if(pageField instanceof SwingDateElement) {
 			SwingDateElement input = (SwingDateElement) pageField;
 			return input.setDateText(text);
+		}
+		else if(pageField instanceof SwingCheckBoxElement) {
+			SwingCheckBoxElement input = (SwingCheckBoxElement) pageField;
+			Boolean selected = Boolean.valueOf(text);
+			if(selected){
+				return  input.select();
+			}else{
+				return  input.deselect();
+			}
 		}
 		else {
 			throw new IllegalAccessException(String.format(
