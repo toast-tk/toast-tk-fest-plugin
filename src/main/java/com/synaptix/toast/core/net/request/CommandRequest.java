@@ -22,7 +22,7 @@ public class CommandRequest implements IIdRequest {
 	protected String _id;
 
 	public enum COMMAND_TYPE {
-		SET("set"), CLICK("click"), EXISTS("exists"), CLEAR("clear"), SELECT("select"), GET("get"),
+		SET("set"), CLICK("click"), EXISTS("exists"), CLEAR("clear"), SELECT("select"), GET("get"), OPEN_MENU("openMenu"),
 		DOUBLE_CLICK("doubleClick"), SELECT_MENU("selectMenu"), FIND("find"), COUNT("count"), ACTIVE("active");
 
 		private final String type;
@@ -128,6 +128,12 @@ public class CommandRequest implements IIdRequest {
 			this.action = COMMAND_TYPE.GET;
 			return this;
 		}
+		
+		public CommandRequestBuilder openMenu() {
+				this.action = COMMAND_TYPE.OPEN_MENU;
+				return this;
+			}
+
 
 		public CommandRequestBuilder select(
 			String itemName) {

@@ -10,6 +10,7 @@ import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SelectSub
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SelectTableRow;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.SelectValueInList;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.StoreComponentValueInVar;
+import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.OpenContectualMenu;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.TypeValue;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.TypeValueInInput;
 import static com.synaptix.toast.core.adapter.ActionAdapterSentenceRef.TypeVarIn;
@@ -216,6 +217,19 @@ public abstract class AbstractSwingActionAdapter {
 	public ITestResult select(SwingAutoElement elementField, SwingAutoElement containerField)
 		throws Exception {
 		return clickOnIn(elementField, containerField);
+	}
+	
+	
+	@Action(action = OpenContectualMenu, description = "Ouvre un menu contextuel")
+	public ITestResult openContextualMenu(SwingAutoElement pageField) throws Exception {
+		AutoSwingType type = pageField.getWrappedElement().getType();
+		String uid = UUID.randomUUID().toString();
+		CommandRequest commandRequest = new CommandRequest
+				.CommandRequestBuilder(uid).
+				with(pageField.getWrappedElement().getLocator()).
+				ofType(type.name()).openMenu().build();
+		ITestResult result = driver.processAndWaitForValue(commandRequest);
+		return result;
 	}
 
 	@Action(action = SelectValueInList, description = "Selectionner une valeur dans une liste")

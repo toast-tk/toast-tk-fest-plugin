@@ -9,29 +9,46 @@ import org.fest.swing.fixture.JTableFixture;
 
 import com.synaptix.toast.adapter.swing.handler.ISwingWidgetActionHandler;
 import com.synaptix.toast.adapter.swing.utils.FestRobotInstance;
+import com.synaptix.toast.core.net.request.CommandRequest;
 import com.synaptix.toast.core.net.request.TableCommandRequest;
 import com.synaptix.toast.core.net.request.TableCommandRequestQueryCriteria;
+import com.synaptix.toast.dao.domain.api.test.ITestResult.ResultKind;
 
 public class JTableActionHandler implements
-	ISwingWidgetActionHandler<JTable, String, TableCommandRequest> {
+	ISwingWidgetActionHandler<JTable, String, CommandRequest> {
 
 	@Override
-	public String handle(JTable target, final TableCommandRequest command) {
-		JTableFixture tFixture = new JTableFixture(
-				FestRobotInstance.getRobot(), target);
+	public String handle(JTable target, final CommandRequest command) {
+		JTableFixture tFixture = new JTableFixture(FestRobotInstance.getRobot(), target);
+		
 		switch (command.action) {
 		case COUNT:
 			return handleCountAction(tFixture);
 		case FIND:
-			return handleFindAction(command, tFixture);
+			return handleFindAction((TableCommandRequest) command, tFixture);
+		case OPEN_MENU:
+			return handleOpenMenu(tFixture);
 		case DOUBLE_CLICK:
-			return handleDoubleClickAction(command, tFixture);
+			return handleDoubleClickAction((TableCommandRequest) command, tFixture);
 		case SELECT_MENU:
-			return handleSelectMenu(command, tFixture);
+			return handleSelectMenu((TableCommandRequest) command, tFixture);
 		default:
-			throw new IllegalArgumentException(
-					"Unsupported command for JTable: " + command.action.name());
+			throw new IllegalArgumentException("Unsupported command for JTable: " + command.action.name());
 		}
+	}
+
+	private String handleOpenMenu(final JTableFixture tFixture) {
+		FestRobotInstance.runOutsideEDT(new Runnable() {			
+			@Override
+			public void run() {
+				try{					
+					tFixture.showPopupMenu();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		});
+		return ResultKind.SUCCESS.name();
 	}
 
 	private String handleSelectMenu(final TableCommandRequest command,
@@ -40,8 +57,7 @@ public class JTableActionHandler implements
 			int totalFound = 0;
 			boolean found = findRowByCriteria(tFixture, command, i, totalFound);
 			if (found) {
-				JTableCellFixture cell = tFixture.cell(TableCell.row(i).column(
-						1));
+				JTableCellFixture cell = tFixture.cell(TableCell.row(i).column(1));
 				selectCellPopupMenuItem(command, cell);
 				return String.valueOf(i);
 			}

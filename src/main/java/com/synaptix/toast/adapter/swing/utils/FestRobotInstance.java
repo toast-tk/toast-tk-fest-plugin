@@ -1,6 +1,7 @@
 package com.synaptix.toast.adapter.swing.utils;
 
 import java.awt.Point;
+import java.util.concurrent.CountDownLatch;
 
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.MouseButton;
@@ -26,6 +27,23 @@ public final class FestRobotInstance {
 	
 	public static void runOutsideEDT(Runnable runnable){
 		new Thread(runnable).start();
+	}
+	
+	public static void runOutsideEDTSync(Runnable runnable){
+		CountDownLatch l = new CountDownLatch(1);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				runnable.run();
+				l.countDown();
+			}
+		}).start();
+		try {
+			l.await();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void doubleClick(
