@@ -241,8 +241,14 @@ public abstract class AbstractSwingActionAdapter {
 		String value,
 		SwingAutoElement pageField)
 		throws Exception {
-		SwingListElement list = (SwingListElement) pageField;
-		list.select(value);
+		if(pageField instanceof SwingListElement){
+			SwingListElement list = (SwingListElement) pageField;
+			list.select(value);			
+		}else if (pageField instanceof SwingInputElement){
+			typeIn(value, pageField);
+		}else{
+			return new FailureResult();
+		}
 		return new SuccessResult();
 	}
 
