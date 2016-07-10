@@ -1,0 +1,32 @@
+package io.toast.tk.adapter.swing.handler.input;
+
+import javax.swing.JPasswordField;
+
+import org.apache.commons.lang3.StringUtils;
+
+import io.toast.tk.adapter.swing.handler.ISwingWidgetActionHandler;
+import io.toast.tk.adapter.swing.utils.FestRobotInstance;
+import io.toast.tk.core.net.request.CommandRequest;
+
+
+public class JPasswordFieldActionHandler implements ISwingWidgetActionHandler<JPasswordField, String, CommandRequest>{
+
+	@Override
+	public String handle(
+		JPasswordField textField,
+		CommandRequest command) {
+		switch(command.action) {
+			case SET :
+				textField.setText(command.value);
+				break;
+			case CLICK :
+				FestRobotInstance.getRobot().click(textField);
+				break;
+			case GET :
+				return StringUtils.join(textField.getPassword(), "");
+			default :
+				throw new IllegalArgumentException("Unsupported command for JPasswordField: " + command.action.name());
+		}
+		return null;
+	}
+}
