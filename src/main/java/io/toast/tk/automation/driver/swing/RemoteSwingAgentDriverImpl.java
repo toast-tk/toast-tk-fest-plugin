@@ -189,7 +189,6 @@ public class RemoteSwingAgentDriverImpl implements IRemoteSwingAgentDriver {
 	/**
 	 * to call before any request
 	 * 
-	 * @return
 	 */
 	public void init() {
 		checkConnection();
